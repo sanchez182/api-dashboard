@@ -5,11 +5,9 @@ import { AboutModule } from './about/about.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
-import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
-    EventsModule,
     AuthModule,
     AboutModule,
     RestaurantModule,

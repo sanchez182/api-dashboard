@@ -14,33 +14,9 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { CreateRestaurantDto, UpdateRestaurantDto } from './dto';
 import { RestaurantService } from './restaurant.service';
-import { Client, ClientKafka, Transport } from '@nestjs/microservices';
-
 @Controller('api/restaurant')
 export class RestaurantController {
   constructor(private restaurantService: RestaurantService) {}
-
-  @Client({
-    transport: Transport.KAFKA,
-    options: {
-      client: {
-        clientId: 'kafkaSample',
-        brokers: ['localhost:9092'],
-      },
-      consumer: {
-        groupId: 'my-kafka-consumer', // Should be the same thing we give in consumer
-      },
-    },
-  })
-  client: ClientKafka;
-
-  async onModuleInit() {
-    // Need to subscribe to topic
-    // so that we can get the response from kafka microservice
-    this.client.subscribeToResponseOf('caca');
-    console.log('jajajjaja');
-    await this.client.connect();
-  }
 
   @Get('/:id')
   public async getRestaurant(@Res() res, @Param('id') restaurantId: string) {
@@ -48,8 +24,6 @@ export class RestaurantController {
     if (!restaurant) {
       throw new NotFoundException('restaurant does not exist!');
     }
-    console.log('cacacaca');
-    this.client.emit<string>('caca', 'ssss ');
     return res.status(HttpStatus.OK).json(restaurant);
   }
 
