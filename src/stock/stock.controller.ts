@@ -12,15 +12,16 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateRestaurantDto, UpdateRestaurantDto } from './dto';
-import { RestaurantService } from './restaurant.service';
-@Controller('api/restaurant')
-export class RestaurantController {
-  constructor(private restaurantService: RestaurantService) {}
+import { CreateStockDto, UpdateStockDto } from './dto';
+import { StockService } from './stock.service';
+
+@Controller('api/stock')
+export class StockController {
+  constructor(private stockService: StockService) {}
 
   @Get('/:id')
   public async getRestaurant(@Res() res, @Param('id') restaurantId: string) {
-    const restaurant = await this.restaurantService.findOne(restaurantId);
+    const restaurant = await this.stockService.findOne(restaurantId);
     if (!restaurant) {
       throw new NotFoundException('restaurant does not exist!');
     }
@@ -28,22 +29,18 @@ export class RestaurantController {
   }
 
   @Post()
- // @UseGuards(AuthGuard())
-  public async addrestaurant(
+  @UseGuards(AuthGuard())
+  public async addStock(
     @Res() res,
-    @Body() createRestaurantDto: CreateRestaurantDto,
+    @Body() createRestaurantDto: CreateStockDto,
   ) {
     try {
-      console.log(createRestaurantDto);
-      const restaurant = await this.restaurantService.create(
-        createRestaurantDto,
-      );
+      const restaurant = await this.stockService.create(createRestaurantDto);
       return res.status(HttpStatus.OK).json({
         message: 'restaurant has been created successfully',
         restaurant,
       });
     } catch (err) {
-      console.log(err)
       return res.status(HttpStatus.BAD_REQUEST).json({
         message: 'Error: restaurant not created!',
         status: 400,
@@ -52,16 +49,16 @@ export class RestaurantController {
   }
 
   @Put('/:id')
-  //@UseGuards(AuthGuard())
-  public async updaterestaurant(
+  @UseGuards(AuthGuard())
+  public async updateStock(
     @Res() res,
     @Param('id') restaurantId: string,
-    @Body() updateRestaurantDto: UpdateRestaurantDto,
+    @Body() updaterestaurantDto: UpdateStockDto,
   ) {
     try {
-      const restaurant = await this.restaurantService.update(
+      const restaurant = await this.stockService.update(
         restaurantId,
-        updateRestaurantDto,
+        updaterestaurantDto,
       );
       if (!restaurant) {
         throw new NotFoundException('restaurant does not exist!');
@@ -85,7 +82,7 @@ export class RestaurantController {
       throw new NotFoundException('restaurant ID does not exist');
     }
 
-    const restaurant = await this.restaurantService.remove(restaurantId);
+    const restaurant = await this.stockService.remove(restaurantId);
 
     if (!restaurant) {
       throw new NotFoundException('restaurant does not exist');

@@ -1,56 +1,63 @@
+import {
+  IFoodType,
+  IFoodTime,
+  IDrink,
+  ITables,
+  ISchedule,
+} from './../restaurant/interfaces/restaurant.interface';
 /* eslint-disable prettier/prettier */
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 @Schema({ collection: 'restaurants' })
 export class Restaurant extends Document {
-  @Prop({required:true,unique: true})
+  @Prop({ unique: true })
   name: string;
 
-  @Prop({type: Object})
+  @Prop()
+  restaurantDescription: string;
+
+  @Prop({ type: Object})
   ubication: {
-    long: number,
-    lat: number,
+    long: number;
+    lat: number;
   };
 
   @Prop()
   img: string;
 
   @Prop()
+  isActive: boolean;
+
+  @Prop()
+  isOpen: boolean;
+
+  @Prop()
+  createdDate: Date;
+
+  @Prop()
+  updatedRegister: Date;
+
+  @Prop({ type: Array})
+  services: []; // express, en sitio, para llevar
+
+  @Prop({ type: Array})
+  schedule: ISchedule;
+
+  @Prop()
   phone: string;
 
-  @Prop()
-  foodTimeList:  [{
-    model: { type: [Types.ObjectId],
-      ref: 'FoodTime',
-      required: true},
-      isActive: boolean,
-      showInApp: boolean
-  }];
+  @Prop({ type: Array})
+  foodTimeList: IFoodTime;
 
-  @Prop()
-  foodTypeList: [{
-    model: { type: [Types.ObjectId],
-      ref: 'FoodType',
-      required: true},
-      isActive: boolean,
-      showInApp: boolean
-  }];
+  @Prop({ type: Array})
+  foodTypeList: IFoodType;
 
-  @Prop()
-  drinkTypeList: [{
-    model:  { type: [Types.ObjectId],
-      ref: 'DrinkType',
-      required: true},
-      isActive: boolean,
-      showInApp: boolean
-  }];
+  @Prop({ type: Array })
+  drinkTypeList: IDrink;
 
-  @Prop()
-  tableList: [{
-    tableNumber: number,
-    selected: boolean
-}]
+  @Prop({ type: Array})
+  tableList: ITables
 }
 
 export const RestautantSchema = SchemaFactory.createForClass(Restaurant);

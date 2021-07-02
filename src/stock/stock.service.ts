@@ -1,15 +1,15 @@
+import { Stock } from './../schemas/stock';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Restaurant } from './../schemas/restaurant';
-import { CreateRestaurantDto, UpdateRestaurantDto } from './dto';
-import { IRestaurant } from './interfaces/restaurant.interface';
+import { CreateStockDto, UpdateStockDto } from './dto';
+import { IStock } from './interfaces/stock.interface';
 
 @Injectable()
-export class RestaurantService {
+export class StockService {
   constructor(
-    @InjectModel(Restaurant.name)
-    private readonly restaurantModel: Model<Restaurant>,
+    @InjectModel(Stock.name)
+    private readonly restaurantModel: Model<Stock>,
   ) {}
 
   /*   public async findAll(
@@ -25,7 +25,7 @@ export class RestaurantService {
       .exec();
   } */
 
-  public async findOne(restaurantId: string): Promise<Restaurant> {
+  public async findOne(restaurantId: string): Promise<Stock> {
     const restaurant = await this.restaurantModel
       .findById({ _id: restaurantId })
       .exec();
@@ -37,28 +37,25 @@ export class RestaurantService {
     return restaurant;
   }
 
-  public async create(
-    createRestaurantDto: CreateRestaurantDto,
-  ): Promise<IRestaurant> {
+  public async create(createRestaurantDto: CreateStockDto): Promise<IStock> {
     const newRestaurant = await new this.restaurantModel(createRestaurantDto);
-    return newRestaurant.save();
+    return null;
   }
 
   public async update(
-    idRestaurant: string,
-    updateCustomerDto: UpdateRestaurantDto,
-  ): Promise<IRestaurant> {
-    console.log(updateCustomerDto)
+    customerId: string,
+    updateCustomerDto: UpdateStockDto,
+  ): Promise<IStock> {
     const existingCustomer = await this.restaurantModel.findByIdAndUpdate(
-      { _id: idRestaurant },
+      { _id: customerId },
       updateCustomerDto,
     );
 
     if (!existingCustomer) {
-      throw new NotFoundException(`Restaurant #${idRestaurant} not found`);
+      throw new NotFoundException(`Customer #${customerId} not found`);
     }
 
-    return existingCustomer;
+    return null;
   }
 
   public async remove(customerId: string): Promise<any> {

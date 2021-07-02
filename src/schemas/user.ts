@@ -4,17 +4,23 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class User extends Document {
-  @Prop()
+  @Prop({required:true})
   name: string;
 
-  @Prop({ unique: true})
+  @Prop({ unique: true,required:true})
   email: string;
 
-  @Prop()
+  @Prop({required:true})
   password: string;
 
   @Prop()
   role: string;
+
+  @Prop({required:true})
+  restaurant: string;
+
+  @Prop()
+  createDate: Date;
 
 /*   @Prop({ type: [Types.ObjectId], ref: 'Organization' })
   organizations: string */
