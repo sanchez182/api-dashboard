@@ -9,9 +9,9 @@ import {
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema({ collection: 'restaurants' })
+@Schema({ collection: 'restaurantDetail' })
 export class Restaurant extends Document {
-  @Prop({ unique: true })
+  @Prop({ unique: true, required: true })
   name: string;
 
   @Prop()
@@ -25,6 +25,9 @@ export class Restaurant extends Document {
 
   @Prop()
   img: string;
+
+  @Prop({ unique: true , required: true})
+  urlMenu: string;
 
   @Prop()
   isActive: boolean;

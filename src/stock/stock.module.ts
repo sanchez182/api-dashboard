@@ -1,3 +1,4 @@
+import { UsersModule } from './../users/users.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
@@ -8,6 +9,7 @@ import { StockService } from './stock.service';
 @Module({
   imports: [
     AuthModule,
+    UsersModule,
     MongooseModule.forFeature([{ name: Stock.name, schema: StockSchema }]),
   ],
   controllers: [StockController],

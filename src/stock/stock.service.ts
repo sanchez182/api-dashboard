@@ -9,7 +9,7 @@ import { IStock } from './interfaces/stock.interface';
 export class StockService {
   constructor(
     @InjectModel(Stock.name)
-    private readonly restaurantModel: Model<Stock>,
+    private readonly stockModel: Model<Stock>,
   ) {}
 
   /*   public async findAll(
@@ -26,7 +26,7 @@ export class StockService {
   } */
 
   public async findOne(restaurantId: string): Promise<Stock> {
-    const restaurant = await this.restaurantModel
+    const restaurant = await this.stockModel
       .findById({ _id: restaurantId })
       .exec();
 
@@ -37,16 +37,16 @@ export class StockService {
     return restaurant;
   }
 
-  public async create(createRestaurantDto: CreateStockDto): Promise<IStock> {
-    const newRestaurant = await new this.restaurantModel(createRestaurantDto);
-    return null;
+  public async addItemStock(createStockDto: CreateStockDto): Promise<IStock> {
+    const stock = await new this.stockModel(createStockDto);
+    return stock.save();
   }
 
   public async update(
     customerId: string,
     updateCustomerDto: UpdateStockDto,
   ): Promise<IStock> {
-    const existingCustomer = await this.restaurantModel.findByIdAndUpdate(
+    const existingCustomer = await this.stockModel.findByIdAndUpdate(
       { _id: customerId },
       updateCustomerDto,
     );
@@ -59,9 +59,7 @@ export class StockService {
   }
 
   public async remove(customerId: string): Promise<any> {
-    const deletedCustomer = await this.restaurantModel.findByIdAndRemove(
-      customerId,
-    );
+    const deletedCustomer = await this.stockModel.findByIdAndRemove(customerId);
     return deletedCustomer;
   }
 }

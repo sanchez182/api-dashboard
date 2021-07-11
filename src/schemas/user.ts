@@ -17,7 +17,7 @@ export class User extends Document {
   role: string;
 
   @Prop({required:true})
-  restaurant: string;
+  idRestaurant: string;
 
   @Prop()
   createDate: Date;

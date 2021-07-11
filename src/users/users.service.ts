@@ -16,6 +16,7 @@ export class UsersService {
   ) {}
 
   async findOne(options?: any): Promise<User> {
+    console.log('en findOne');
     const user = await this.userModel.findOne(options);
     return user;
   }
@@ -23,7 +24,7 @@ export class UsersService {
   //async findByLogin({ email, password }: LoginUserDto): Promise<UserDto> {
   async findByLogin({ email, password }: LoginUserDto): Promise<User> {
     const user = await this.userModel.findOne({ email });
-
+    console.log(user);
     if (!user) {
       throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
     }
@@ -40,6 +41,7 @@ export class UsersService {
   }
 
   async findByPayload({ name }: any): Promise<UserDto> {
+    console.log('en findByPayload');
     return await this.findOne({ name });
   }
 

@@ -28,21 +28,18 @@ export class StockController {
     return res.status(HttpStatus.OK).json(restaurant);
   }
 
-  @Post()
+  @Post('addItemStock')
   @UseGuards(AuthGuard())
-  public async addStock(
-    @Res() res,
-    @Body() createRestaurantDto: CreateStockDto,
-  ) {
+  public async addStock(@Res() res, @Body() addStock: CreateStockDto) {
     try {
-      const restaurant = await this.stockService.create(createRestaurantDto);
+      const stock = await this.stockService.addItemStock(addStock);
       return res.status(HttpStatus.OK).json({
-        message: 'restaurant has been created successfully',
-        restaurant,
+        message: 'Item has been add successfully',
+        stock,
       });
     } catch (err) {
       return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Error: restaurant not created!',
+        message: 'Error: Item not created!',
         status: 400,
       });
     }

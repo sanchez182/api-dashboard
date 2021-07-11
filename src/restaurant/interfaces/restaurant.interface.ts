@@ -32,6 +32,7 @@ export interface IRestaurant extends Document {
   readonly name: string;
   readonly restaurantDescription: string;
   readonly ubication: any;
+  readonly urlMenu: string;
   readonly isOpen: boolean;
   readonly isActive: boolean;
   readonly img: string;

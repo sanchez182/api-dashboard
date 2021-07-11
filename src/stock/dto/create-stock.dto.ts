@@ -1,38 +1,21 @@
-import { MaxLength, IsNotEmpty, IsString, IsArray } from 'class-validator';
+import {
+  MaxLength,
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  IsDate,
+} from 'class-validator';
 
 export class CreateStockDto {
   @IsString()
-  @MaxLength(30)
+  @MaxLength(300)
   @IsNotEmpty()
-  readonly name: string;
+  readonly itemdDescription: string;
 
-  @IsString()
-  readonly ubication: {
-    long: number;
-    lat: number;
-  };
+  @IsNumber()
+  @IsNotEmpty()
+  readonly quantityPortion: number;
 
-  @IsString()
-  /*   @IsEmail()
-  @IsNotEmpty() */
-  readonly img: string;
-
-  @IsString()
-  /*   @MaxLength(30)
-  @IsNotEmpty() */
-  readonly phone: string;
-
-  @IsArray()
-  /*   @MaxLength(40)
-  @IsNotEmpty() */
-  readonly foodTimeList: [];
-
-  @IsArray()
-  readonly foodTypeList: [];
-
-  @IsArray()
-  readonly drinkTypeList: [];
-
-  @IsArray()
-  readonly tableList: [];
+  @IsDate()
+  readonly registerDate: Date;
 }

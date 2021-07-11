@@ -4,4 +4,8 @@ export class CreateRestaurantDto {
   @MaxLength(30)
   @IsNotEmpty()
   readonly name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly urlMenu: string;
 }

@@ -5,15 +5,15 @@ import { Document} from 'mongoose';
 @Schema({ collection: 'stock' })
 export class Stock extends Document {
   @Prop({required:true,unique: true})
-  name: string;
+   itemdDescription: string;
 
-  @Prop()
-  itemStock : [{
-    itemdDescription: string,
-    quantityPortion: number,
-    price: number,
-    registerDate: Date
-  }]
+
+  @Prop({required:true,unique: true})
+   quantityPortion: number;
+
+
+  @Prop({required:true,unique: true})
+   registerDate: Date;
   
 }
 
