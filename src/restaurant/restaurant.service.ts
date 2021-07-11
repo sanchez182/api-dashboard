@@ -25,13 +25,10 @@ export class RestaurantService {
       .exec();
   } */
 
-  public async findOne(restaurantId: string): Promise<Restaurant> {
-    const restaurant = await this.restaurantModel
-      .findById({ _id: restaurantId })
-      .exec();
-
+  public async getDataRestaurant(): Promise<Restaurant> {
+    const restaurant = await this.restaurantModel.findOne().exec();
     if (!restaurant) {
-      throw new NotFoundException(`Restaurant #${restaurantId} not found`);
+      throw new NotFoundException(`Restaurant not found`);
     }
 
     return restaurant;
@@ -48,7 +45,7 @@ export class RestaurantService {
     idRestaurant: string,
     updateCustomerDto: UpdateRestaurantDto,
   ): Promise<IRestaurant> {
-    console.log(updateCustomerDto)
+    console.log(updateCustomerDto);
     const existingCustomer = await this.restaurantModel.findByIdAndUpdate(
       { _id: idRestaurant },
       updateCustomerDto,

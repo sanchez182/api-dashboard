@@ -18,9 +18,9 @@ import { RestaurantService } from './restaurant.service';
 export class RestaurantController {
   constructor(private restaurantService: RestaurantService) {}
 
-  @Get('/:id')
-  public async getRestaurant(@Res() res, @Param('id') restaurantId: string) {
-    const restaurant = await this.restaurantService.findOne(restaurantId);
+  @Get()
+  public async getRestaurant(@Res() res) {
+    const restaurant = await this.restaurantService.getDataRestaurant();
     if (!restaurant) {
       throw new NotFoundException('restaurant does not exist!');
     }
