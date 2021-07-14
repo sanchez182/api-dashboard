@@ -41,20 +41,17 @@ export class RestaurantService {
     return newRestaurant.save();
   }
 
-  public async update(
-    idRestaurant: string,
-    updateCustomerDto: UpdateRestaurantDto,
-  ): Promise<IRestaurant> {
+  public async update(updateCustomerDto: UpdateRestaurantDto): Promise<any> {
     console.log(updateCustomerDto);
-    const existingCustomer = await this.restaurantModel.findByIdAndUpdate(
-      { _id: idRestaurant },
+    const existingCustomer = await this.restaurantModel.updateOne(
       updateCustomerDto,
     );
 
     if (!existingCustomer) {
-      throw new NotFoundException(`Restaurant #${idRestaurant} not found`);
+      throw new NotFoundException(`Restaurant  not found`);
     }
 
+    console.log(existingCustomer)
     return existingCustomer;
   }
 

@@ -28,6 +28,12 @@ export interface ISchedule {
   day: string;
   hour: string;
 }
+
+export interface IService {
+  express: boolean;
+  inSite: boolean;
+  toGo: boolean;
+}
 export interface IRestaurant extends Document {
   readonly name: string;
   readonly restaurantDescription: string;
@@ -36,10 +42,10 @@ export interface IRestaurant extends Document {
   readonly isOpen: boolean;
   readonly isActive: boolean;
   readonly img: string;
-  readonly phone: string;
+  readonly phoneList: [];
   readonly createdDate: Date;
   readonly updatedRegister: Date;
-  readonly services: [];
+  readonly services: IService;
   readonly schedule: ISchedule;
   readonly foodTimeList: IFoodTime;
   readonly foodTypeList: IFoodType;

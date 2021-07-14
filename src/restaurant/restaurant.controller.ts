@@ -51,16 +51,14 @@ export class RestaurantController {
     }
   }
 
-  @Put('/:id')
+  @Put()
   //@UseGuards(AuthGuard())
   public async updaterestaurant(
     @Res() res,
-    @Param('id') restaurantId: string,
     @Body() updateRestaurantDto: UpdateRestaurantDto,
   ) {
     try {
       const restaurant = await this.restaurantService.update(
-        restaurantId,
         updateRestaurantDto,
       );
       if (!restaurant) {

@@ -4,6 +4,7 @@ import {
   IDrink,
   ITables,
   ISchedule,
+  IService,
 } from './../restaurant/interfaces/restaurant.interface';
 /* eslint-disable prettier/prettier */
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
@@ -41,14 +42,14 @@ export class Restaurant extends Document {
   @Prop()
   updatedRegister: Date;
 
-  @Prop({ type: Array})
-  services: []; // express, en sitio, para llevar
+  @Prop({ type: Object})
+  services: IService; // express, en sitio, para llevar
 
   @Prop({ type: Array})
   schedule: ISchedule;
 
-  @Prop()
-  phone: string;
+  @Prop({ type: Array})
+  phoneList: [];
 
   @Prop({ type: Array})
   foodTimeList: IFoodTime;

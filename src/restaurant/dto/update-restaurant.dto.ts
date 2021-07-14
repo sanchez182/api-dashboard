@@ -4,6 +4,7 @@ import {
   IFoodType,
   IDrink,
   ITables,
+  IService,
 } from './../interfaces/restaurant.interface';
 import {
   MaxLength,
@@ -27,35 +28,27 @@ export class UpdateRestaurantDto {
   };
 
   @IsBoolean()
-  @IsNotEmpty()
   isOpen: boolean;
 
   @IsString()
-  @IsNotEmpty()
   readonly img: string;
 
   @IsBoolean()
-  @IsNotEmpty()
   readonly isActive: boolean;
 
-  @IsString()
-  @IsNotEmpty()
-  readonly phone: string;
+  @IsArray()
+  readonly phoneList: [];
 
   @IsDate()
-  @IsNotEmpty()
   readonly createdDate: Date;
 
   @IsDate()
-  @IsNotEmpty()
   readonly updatedRegister: Date;
 
-  @IsArray()
-  @IsNotEmpty()
-  readonly services: [];
+  @IsObject()
+  readonly services: IService;
 
   @IsArray()
-  @IsNotEmpty()
   readonly schedule: ISchedule;
 
   @IsArray()
@@ -63,14 +56,11 @@ export class UpdateRestaurantDto {
   readonly foodTimeList: IFoodTime;
 
   @IsArray()
-  @IsNotEmpty()
   readonly foodTypeList: IFoodType;
 
   @IsArray()
-  @IsNotEmpty()
   readonly drinkTypeList: IDrink;
 
   @IsArray()
-  @IsNotEmpty()
   readonly tableList: ITables;
 }
