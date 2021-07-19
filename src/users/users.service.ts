@@ -16,7 +16,6 @@ export class UsersService {
   ) {}
 
   async findOne(options?: any): Promise<User> {
-    console.log('en findOne');
     const user = await this.userModel.findOne(options);
     return user;
   }
@@ -41,7 +40,6 @@ export class UsersService {
   }
 
   async findByPayload({ name }: any): Promise<UserDto> {
-    console.log('en findByPayload');
     return await this.findOne({ name });
   }
 

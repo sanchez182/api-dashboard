@@ -12,19 +12,6 @@ export class RestaurantService {
     private readonly restaurantModel: Model<Restaurant>,
   ) {}
 
-  /*   public async findAll(
-    paginationQuery: PaginationQueryDto,
-  ): Promise<Customer[]> {
-    const { limit, offset } = paginationQuery;
-
-    return await this.restaurantModel
-      .find()
-      .skip(offset)
-      .limit(limit)
-      .populate('organization')
-      .exec();
-  } */
-
   public async getDataRestaurant(): Promise<Restaurant> {
     const restaurant = await this.restaurantModel.findOne().exec();
     if (!restaurant) {
@@ -51,7 +38,7 @@ export class RestaurantService {
       throw new NotFoundException(`Restaurant  not found`);
     }
 
-    console.log(existingCustomer)
+    console.log(existingCustomer);
     return existingCustomer;
   }
 

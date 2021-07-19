@@ -2,7 +2,6 @@ import {
   IFoodType,
   IFoodTime,
   IDrink,
-  ITables,
   ISchedule,
   IService,
 } from './../restaurant/interfaces/restaurant.interface';
@@ -22,6 +21,7 @@ export class Restaurant extends Document {
   ubication: {
     long: number;
     lat: number;
+    direction: string;
   };
 
   @Prop()
@@ -30,8 +30,8 @@ export class Restaurant extends Document {
   @Prop({ unique: true , required: true})
   urlMenu: string;
 
-  @Prop()
-  isActive: boolean;
+/*   @Prop()
+  isActive: boolean; */
 
   @Prop()
   isOpen: boolean;
@@ -59,9 +59,6 @@ export class Restaurant extends Document {
 
   @Prop({ type: Array })
   drinkTypeList: IDrink;
-
-  @Prop({ type: Array})
-  tableList: ITables
 }
 
 export const RestautantSchema = SchemaFactory.createForClass(Restaurant);

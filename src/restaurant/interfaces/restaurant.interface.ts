@@ -17,16 +17,10 @@ export interface IFoodTime {
   isActive: boolean;
   showInApp: boolean;
 }
-
-export interface ITables {
-  tableNumber: number;
-  selected: boolean;
-  state: string;
-}
-
 export interface ISchedule {
   day: string;
   hour: string;
+  open: boolean;
 }
 
 export interface IService {
@@ -40,7 +34,6 @@ export interface IRestaurant extends Document {
   readonly ubication: any;
   readonly urlMenu: string;
   readonly isOpen: boolean;
-  readonly isActive: boolean;
   readonly img: string;
   readonly phoneList: [];
   readonly createdDate: Date;
@@ -50,5 +43,4 @@ export interface IRestaurant extends Document {
   readonly foodTimeList: IFoodTime;
   readonly foodTypeList: IFoodType;
   readonly drinkTypeList: IDrink;
-  readonly tableList: ITables;
 }

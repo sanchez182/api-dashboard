@@ -1,8 +1,8 @@
+import { TableModule } from './tables/table.module';
 import { StockModule } from './stock/stock.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AboutModule } from './about/about.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
@@ -10,7 +10,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     AuthModule,
-    AboutModule,
+    TableModule,
     RestaurantModule,
     StockModule,
     MongooseModule.forRootAsync({

@@ -3,7 +3,6 @@ import {
   IFoodTime,
   IFoodType,
   IDrink,
-  ITables,
   IService,
 } from './../interfaces/restaurant.interface';
 import {
@@ -25,6 +24,7 @@ export class UpdateRestaurantDto {
   readonly ubication: {
     long: number;
     lat: number;
+    direction: string;
   };
 
   @IsBoolean()
@@ -32,9 +32,6 @@ export class UpdateRestaurantDto {
 
   @IsString()
   readonly img: string;
-
-  @IsBoolean()
-  readonly isActive: boolean;
 
   @IsArray()
   readonly phoneList: [];
@@ -60,7 +57,4 @@ export class UpdateRestaurantDto {
 
   @IsArray()
   readonly drinkTypeList: IDrink;
-
-  @IsArray()
-  readonly tableList: ITables;
 }
