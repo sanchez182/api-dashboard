@@ -1,3 +1,4 @@
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { TableModule } from './tables/table.module';
 import { StockModule } from './stock/stock.module';
 import { Module } from '@nestjs/common';
@@ -10,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     AuthModule,
+    CloudinaryModule,
     TableModule,
     RestaurantModule,
     StockModule,
