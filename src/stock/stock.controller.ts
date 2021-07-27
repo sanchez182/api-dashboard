@@ -19,8 +19,17 @@ import { StockService } from './stock.service';
 export class StockController {
   constructor(private stockService: StockService) {}
 
+  @Get()
+  public async findAll(@Res() res) {
+    const stockList = await this.stockService.findAll();
+    if (!stockList) {
+      throw new NotFoundException('There are not records!');
+    }
+    return res.status(HttpStatus.OK).json(stockList);
+  }
+
   @Get('/:id')
-  public async getRestaurant(@Res() res, @Param('id') restaurantId: string) {
+  public async getStockById(@Res() res, @Param('id') restaurantId: string) {
     const restaurant = await this.stockService.findOne(restaurantId);
     if (!restaurant) {
       throw new NotFoundException('restaurant does not exist!');

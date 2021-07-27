@@ -9,12 +9,10 @@ export interface IDrink {
 
 export interface IFoodType {
   foodTypeName: string;
-  isActive: boolean;
   showInApp: boolean;
 }
 export interface IFoodTime {
   foodTimeName: string;
-  isActive: boolean;
   showInApp: boolean;
 }
 export interface ISchedule {
@@ -30,6 +28,7 @@ export interface IService {
 }
 export interface IRestaurant extends Document {
   readonly name: string;
+  readonly email: string;
   readonly restaurantDescription: string;
   readonly ubication: any;
   readonly urlMenu: string;

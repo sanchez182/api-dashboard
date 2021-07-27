@@ -16,6 +16,8 @@ export class CreateStockDto {
   @IsNotEmpty()
   readonly quantityPortion: number;
 
+  readonly code: string;
+
   @IsDate()
   readonly registerDate: Date;
 }

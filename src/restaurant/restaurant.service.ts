@@ -30,8 +30,14 @@ export class RestaurantService {
 
   public async update(updateCustomerDto: UpdateRestaurantDto): Promise<any> {
     console.log(updateCustomerDto);
-    const existingCustomer = await this.restaurantModel.updateOne(
+    const existingCustomer = await this.restaurantModel.findOneAndUpdate(
+      {},
       updateCustomerDto,
+      {
+        new: true,
+        upsert: true,
+        rawResult: true, // Return the raw result from the MongoDB driver
+      },
     );
 
     if (!existingCustomer) {

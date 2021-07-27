@@ -12,18 +12,21 @@ export class StockService {
     private readonly stockModel: Model<Stock>,
   ) {}
 
-  /*   public async findAll(
-    paginationQuery: PaginationQueryDto,
-  ): Promise<Customer[]> {
-    const { limit, offset } = paginationQuery;
+  // public async findAll(
+  //   paginationQuery: PaginationQueryDto,
+  // ): Promise<Customer[]> {
+  //   const { limit, offset } = paginationQuery;
 
-    return await this.restaurantModel
-      .find()
-      .skip(offset)
-      .limit(limit)
-      .populate('organization')
-      .exec();
-  } */
+  //   return await this.restaurantModel
+  //     .find()
+  //     .skip(offset)
+  //     .limit(limit)
+  //     .populate('organization')
+  //     .exec();
+  // }
+  public async findAll(): Promise<Stock[]> {
+    return await this.stockModel.find().exec();
+  }
 
   public async findOne(restaurantId: string): Promise<Stock> {
     const restaurant = await this.stockModel

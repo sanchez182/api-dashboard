@@ -11,6 +11,8 @@ export class Stock extends Document {
   @Prop({required:true,unique: true})
    quantityPortion: number;
 
+  @Prop({unique: true})
+   code: string;
 
   @Prop({required:true,unique: true})
    registerDate: Date;

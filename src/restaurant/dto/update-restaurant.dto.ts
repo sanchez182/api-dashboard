@@ -20,6 +20,11 @@ export class UpdateRestaurantDto {
   @IsNotEmpty()
   readonly restaurantDescription: string;
 
+  @IsString()
+  @MaxLength(200)
+  @IsNotEmpty()
+  readonly email: string;
+
   @IsObject()
   readonly ubication: {
     long: number;

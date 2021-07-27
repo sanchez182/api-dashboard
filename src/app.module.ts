@@ -1,3 +1,5 @@
+import { PlateModule } from './plate/plate.module';
+import { SupplierModule } from './supplier/supplier.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { TableModule } from './tables/table.module';
 import { StockModule } from './stock/stock.module';
@@ -13,6 +15,8 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     CloudinaryModule,
     TableModule,
+    PlateModule,
+    SupplierModule,
     RestaurantModule,
     StockModule,
     MongooseModule.forRootAsync({

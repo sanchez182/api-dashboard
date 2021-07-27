@@ -30,6 +30,9 @@ export class Restaurant extends Document {
   @Prop({ unique: true , required: true})
   urlMenu: string;
 
+  @Prop({ unique: true , required: true})
+  email: string;
+
 /*   @Prop()
   isActive: boolean; */
 
