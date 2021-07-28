@@ -14,7 +14,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { CreatePlateDto, UpdatePlateDto } from './dto';
 import { PlateService } from './plate.service';
-@Controller('api/Plate')
+@Controller('api/plate')
 export class PlateController {
   constructor(private plateService: PlateService) {}
 
@@ -46,11 +46,15 @@ export class PlateController {
     }
   }
 
-  @Put()
-  //@UseGuards(AuthGuard())
-  public async updatePlate(@Res() res, @Body() updatePlateDto: UpdatePlateDto) {
+  @Put('/:id')
+  @UseGuards(AuthGuard())
+  public async updatePlate(
+    @Res() res,
+    @Param('id') plateId: string,
+    @Body() updatePlateDto: UpdatePlateDto,
+  ) {
     try {
-      const Plate = await this.plateService.update(updatePlateDto);
+      const Plate = await this.plateService.update(updatePlateDto, plateId);
       if (!Plate) {
         throw new NotFoundException('Plate does not exist!');
       }

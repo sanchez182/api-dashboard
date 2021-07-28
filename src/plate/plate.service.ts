@@ -25,10 +25,13 @@ export class PlateService {
     return newPlate.save();
   }
 
-  public async update(updatePlateDto: UpdatePlateDto): Promise<any> {
+  public async update(
+    updatePlateDto: UpdatePlateDto,
+    plateId: string,
+  ): Promise<any> {
     console.log(updatePlateDto);
     const existingCustomer = await this.plateModel.findOneAndUpdate(
-      {},
+      { _id: plateId },
       updatePlateDto,
       {
         new: true,
