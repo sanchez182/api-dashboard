@@ -32,10 +32,10 @@ export class PlateController {
   public async addPlate(@Res() res, @Body() createPlateDto: CreatePlateDto) {
     try {
       console.log(createPlateDto);
-      const Plate = await this.plateService.create(createPlateDto);
+      const plate = await this.plateService.create(createPlateDto);
       return res.status(HttpStatus.OK).json({
         message: 'Plate has been created successfully',
-        Plate,
+        plate,
       });
     } catch (err) {
       console.log(err);
@@ -54,13 +54,13 @@ export class PlateController {
     @Body() updatePlateDto: UpdatePlateDto,
   ) {
     try {
-      const Plate = await this.plateService.update(updatePlateDto, plateId);
-      if (!Plate) {
+      const plate = await this.plateService.update(updatePlateDto, plateId);
+      if (!plate) {
         throw new NotFoundException('Plate does not exist!');
       }
       return res.status(HttpStatus.OK).json({
         message: 'Plate has been successfully updated',
-        Plate,
+        plate,
       });
     } catch (err) {
       return res.status(HttpStatus.BAD_REQUEST).json({

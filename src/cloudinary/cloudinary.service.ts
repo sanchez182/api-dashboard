@@ -10,8 +10,14 @@ export class CloudinaryService {
     data: UploadImageDto,
   ): Promise<UploadApiResponse | UploadApiErrorResponse> {
     return new Promise((resolve, reject) => {
+      if (data.oldImage !== '') {
+        this.deleteImage(data.oldImage);
+      }
       const upload = v2.uploader.upload_stream(
-        { folder: data.folder, upload_preset: 'restaurantAccess' },
+        {
+          folder: data.folder,
+          upload_preset: 'restaurantAccess',
+        },
         (error, result) => {
           if (error) return reject(error);
           resolve(result);
@@ -34,13 +40,20 @@ export class CloudinaryService {
           reject(error);
         });
     });
-    // const data = v2.url('restaurant4.json', { type: 'list' });
+  }
 
-    /*      const upload = v2.image('folder1/folder2/non_existing_id.png', {
-        transformation: [
-          { width: 100, crop: 'scale' },
-          { default_image: 'docs:placeholders:samples:avatar.png' },
-        ],
-      }); */
+  async deleteImage(public_id: string): Promise<any> {
+    return new Promise(async (resolve) => {
+      v2.uploader
+        .destroy(public_id)
+        .then((response) => {
+          //TODO aca algo si falla ok
+          resolve(true);
+        })
+        .catch((error) => {
+          //TODO aca algo si falla
+          //reject(error);
+        });
+    });
   }
 }

@@ -9,7 +9,8 @@ export interface IIngredients {
 export interface IPlate extends Document {
   readonly plateName: string;
   readonly plateDescription: string;
-  readonly img: string;
+  readonly idImg: string;
+  readonly urlImage: string;
   readonly price: number;
   readonly foodType: string;
   readonly showInMenu: boolean;

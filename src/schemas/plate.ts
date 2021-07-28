@@ -11,10 +11,13 @@ export class Plate extends Document {
   @Prop()
   plateDescription: string;
 
-  @Prop()
-  img: string;
+  @Prop({unique: true})
+  idImg: string;
 
-  @Prop({ unique: true , required: true})
+  @Prop()
+  urlImage: string;
+  
+  @Prop({ required: true})
   price: number;
 
   @Prop({ type: Array})

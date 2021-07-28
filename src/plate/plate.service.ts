@@ -1,3 +1,4 @@
+import { CloudinaryService } from './../cloudinary/cloudinary.service';
 import { Plate } from './../schemas/plate';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,6 +11,7 @@ export class PlateService {
   constructor(
     @InjectModel(Plate.name)
     private readonly plateModel: Model<Plate>,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   public async findAll(): Promise<Plate[]> {
@@ -50,6 +52,9 @@ export class PlateService {
 
   public async remove(plateId: string): Promise<any> {
     const deletedCustomer = await this.plateModel.findByIdAndRemove(plateId);
+    if (deletedCustomer) {
+      this.cloudinaryService.deleteImage(deletedCustomer.idImg);
+    }
     return deletedCustomer;
   }
 }

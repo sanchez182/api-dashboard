@@ -1,3 +1,4 @@
+import { CloudinaryService } from './../cloudinary/cloudinary.service';
 import { Plate, PlateSchema } from './../schemas/plate';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -11,6 +12,6 @@ import { PlateService } from './plate.service';
     MongooseModule.forFeature([{ name: Plate.name, schema: PlateSchema }]),
   ],
   controllers: [PlateController],
-  providers: [PlateService],
+  providers: [PlateService, CloudinaryService],
 })
 export class PlateModule {}

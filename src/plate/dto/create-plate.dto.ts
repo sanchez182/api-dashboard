@@ -16,7 +16,11 @@ export class CreatePlateDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly img: string;
+  readonly idImg: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly urlImage: string;
 
   @IsBoolean()
   @IsNotEmpty()

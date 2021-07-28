@@ -3,4 +3,7 @@ export class UploadImageDto {
   @IsString()
   @IsNotEmpty()
   readonly folder: string;
+
+  @IsString()
+  readonly oldImage: string;
 }
