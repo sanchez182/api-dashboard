@@ -50,10 +50,23 @@ export class PlateService {
     return existingCustomer;
   }
 
-  public async remove(plateId: string): Promise<any> {
-    const deletedCustomer = await this.plateModel.findByIdAndRemove(plateId);
+  public async remove(
+    plateId: { idPlate: string; idImg: string }[],
+  ): Promise<any> {
+    const platesId = [];
+    const imagesId = [];
+    plateId.forEach((element) => {
+      platesId.push(element.idPlate);
+      imagesId.push(element.idImg);
+    });
+
+    const deletedCustomer = await this.plateModel.deleteMany({
+      _id: {
+        $in: platesId,
+      },
+    });
     if (deletedCustomer) {
-      this.cloudinaryService.deleteImage(deletedCustomer.idImg);
+      this.cloudinaryService.deleteImage(imagesId);
     }
     return deletedCustomer;
   }

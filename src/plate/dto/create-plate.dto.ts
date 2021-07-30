@@ -15,7 +15,6 @@ export class CreatePlateDto {
   readonly plateName: string;
 
   @IsString()
-  @IsNotEmpty()
   readonly idImg: string;
 
   @IsString()
@@ -27,7 +26,7 @@ export class CreatePlateDto {
   readonly showInMenu: boolean;
 
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: ' plateDescription is required' })
   readonly plateDescription: string;
 
   @IsNumber()

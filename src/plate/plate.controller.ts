@@ -70,22 +70,22 @@ export class PlateController {
     }
   }
 
-  @Delete('/:id')
+  @Delete()
   @UseGuards(AuthGuard())
-  public async deletePlate(@Res() res, @Param('id') PlateId: string) {
-    if (!PlateId) {
+  public async deletePlate(@Res() res, @Body() plateId: []) {
+    if (!plateId) {
       throw new NotFoundException('Plate ID does not exist');
     }
 
-    const Plate = await this.plateService.remove(PlateId);
+    const plate = await this.plateService.remove(plateId);
 
-    if (!Plate) {
+    if (!plate) {
       throw new NotFoundException('Plate does not exist');
     }
 
     return res.status(HttpStatus.OK).json({
       message: 'Plate has been deleted',
-      Plate,
+      plate,
     });
   }
 }

@@ -11,7 +11,7 @@ export class Plate extends Document {
   @Prop()
   plateDescription: string;
 
-  @Prop({unique: true})
+  @Prop()
   idImg: string;
 
   @Prop()
