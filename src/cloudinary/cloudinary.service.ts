@@ -11,7 +11,7 @@ export class CloudinaryService {
   ): Promise<UploadApiResponse | UploadApiErrorResponse> {
     return new Promise((resolve, reject) => {
       if (data.oldImage !== '') {
-        this.deleteImage(data.oldImage);
+        this.deleteImage([data.oldImage]);
       }
       const upload = v2.uploader.upload_stream(
         {
@@ -42,10 +42,26 @@ export class CloudinaryService {
     });
   }
 
-  async deleteImage(public_id: string): Promise<any> {
+  /*   async deleteImage(public_id: string): Promise<any> {
     return new Promise(async (resolve) => {
       v2.uploader
         .destroy(public_id)
+        .then((response) => {
+          //TODO aca algo si falla ok
+          resolve(true);
+        })
+        .catch((error) => {
+          //TODO aca algo si falla
+          //reject(error);
+        });
+    });
+  }
+} */
+
+  async deleteImage(public_id: any[]): Promise<any> {
+    return new Promise(async (resolve) => {
+      v2.api
+        .delete_resources(public_id)
         .then((response) => {
           //TODO aca algo si falla ok
           resolve(true);
