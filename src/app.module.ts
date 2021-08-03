@@ -1,4 +1,5 @@
 import { PlateModule } from './plate/plate.module';
+import { DrinkModule } from './drink/drink.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { TableModule } from './tables/table.module';
@@ -16,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
     CloudinaryModule,
     TableModule,
     PlateModule,
+    DrinkModule,
     SupplierModule,
     RestaurantModule,
     StockModule,

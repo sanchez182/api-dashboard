@@ -7,8 +7,8 @@ import {
   IsDate,
   IsBoolean,
 } from 'class-validator';
-import { IIngredients } from '../interfaces/plate.interface';
-export class CreatePlateDto {
+import { IIngredients } from '../interfaces/drink.interface';
+export class CreateDrinkDto {
   @IsString()
   @MaxLength(60)
   @IsNotEmpty()

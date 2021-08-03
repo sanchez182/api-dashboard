@@ -3,13 +3,13 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { IIngredients } from 'src/plate/interfaces/plate.interface';
 
-@Schema({ collection: 'plate' })
-export class Plate extends Document {
+@Schema({ collection: 'drinks' })
+export class Drink extends Document {
   @Prop({ unique: true, required: true })
-  plateName: string;
+  drinkName: string;
 
   @Prop()
-  plateDescription: string;
+  drinkDescription: string;
 
   @Prop()
   idImg: string;
@@ -27,13 +27,10 @@ export class Plate extends Document {
   updatatedDate: Date;
 
   @Prop()
-  foodType: string;
-
-  @Prop()
-  foodTime: string;
+  drinkType: string;
   
   @Prop()
   showInMenu: boolean;
 }
 
-export const PlateSchema = SchemaFactory.createForClass(Plate);
+export const DrinkSchema = SchemaFactory.createForClass(Drink);

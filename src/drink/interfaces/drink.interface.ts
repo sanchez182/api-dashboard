@@ -6,14 +6,13 @@ export interface IIngredients {
   portions: number;
 }
 
-export interface IPlate extends Document {
-  readonly plateName: string;
-  readonly plateDescription: string;
+export interface IDrinkModel extends Document {
+  readonly drinkName: string;
+  readonly drinkDescription: string;
   readonly idImg: string;
   readonly urlImage: string;
   readonly price: number;
-  readonly foodType: string;
-  readonly foodTime: string;
+  readonly drinkType: string;
   readonly showInMenu: boolean;
   readonly ingredients: IIngredients;
   readonly updatatedDate: Date;
