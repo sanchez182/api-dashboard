@@ -12,7 +12,7 @@ export class CreateDrinkDto {
   @IsString()
   @MaxLength(60)
   @IsNotEmpty()
-  readonly plateName: string;
+  readonly drinkName: string;
 
   @IsString()
   readonly idImg: string;
@@ -26,23 +26,18 @@ export class CreateDrinkDto {
   readonly showInMenu: boolean;
 
   @IsString()
-  @IsNotEmpty({ message: ' plateDescription is required' })
-  readonly plateDescription: string;
+  @IsNotEmpty({ message: ' description is required' })
+  readonly description: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly drinkType: string;
 
   @IsNumber()
   @IsNotEmpty()
   readonly price: number;
 
-  @IsString()
-  @IsNotEmpty()
-  readonly foodType: string;
-
-  @IsString()
-  @IsNotEmpty()
-  readonly foodTime: string;
-  
   @IsArray()
-  @IsNotEmpty()
   readonly ingredients: IIngredients;
 
   @IsDate()

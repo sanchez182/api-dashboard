@@ -26,8 +26,8 @@ export class CreatePlateDto {
   readonly showInMenu: boolean;
 
   @IsString()
-  @IsNotEmpty({ message: ' plateDescription is required' })
-  readonly plateDescription: string;
+  @IsNotEmpty({ message: ' description is required' })
+  readonly description: string;
 
   @IsNumber()
   @IsNotEmpty()

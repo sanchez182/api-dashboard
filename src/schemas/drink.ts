@@ -9,7 +9,7 @@ export class Drink extends Document {
   drinkName: string;
 
   @Prop()
-  drinkDescription: string;
+  description: string;
 
   @Prop()
   idImg: string;

@@ -9,7 +9,7 @@ export class Plate extends Document {
   plateName: string;
 
   @Prop()
-  plateDescription: string;
+  description: string;
 
   @Prop()
   idImg: string;

@@ -8,7 +8,7 @@ export interface IIngredients {
 
 export interface IDrinkModel extends Document {
   readonly drinkName: string;
-  readonly drinkDescription: string;
+  readonly description: string;
   readonly idImg: string;
   readonly urlImage: string;
   readonly price: number;
