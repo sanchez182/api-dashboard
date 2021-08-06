@@ -15,9 +15,14 @@ async function bootstrap() {
       },
     }),
   );
+  const whitelist = [
+    'https://virtual-menu.herokuapp.com/',
+    'http://localhost:3000/',
+  ];
   app.enableCors({
-    credentials: true,
-    origin: '  https://virtual-menu.herokuapp.com/',
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
   });
 
   /*   const options = new DocumentBuilder()
