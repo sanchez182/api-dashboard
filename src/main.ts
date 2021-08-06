@@ -17,10 +17,11 @@ async function bootstrap() {
   );
   const whitelist = [
     'https://virtual-menu.herokuapp.com/',
+    'https://dashboard-menu.herokuapp.com/',
     'http://localhost:3000/',
   ];
   app.enableCors({
-    origin: '*',
+    origin: whitelist,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
   });
