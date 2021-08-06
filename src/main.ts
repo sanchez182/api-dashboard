@@ -20,11 +20,19 @@ async function bootstrap() {
     'https://dashboard-menu.herokuapp.com/',
     'http://localhost:3000/',
   ];
-  app.enableCors({
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  });
+
+  app.enableCors();
+/*   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
-  });
+  }); */
 
   /*   const options = new DocumentBuilder()
     .setTitle(config.swaggerApiTitle)
