@@ -15,7 +15,8 @@ async function bootstrap() {
       },
     }),
   );
-  app.enableCors();
+  app.enableCors({credentials: true, origin: "  https://virtual-menu.herokuapp.com/"});
+
   /*   const options = new DocumentBuilder()
     .setTitle(config.swaggerApiTitle)
     .setDescription(config.swaggerApiDescription)
