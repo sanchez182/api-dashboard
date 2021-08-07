@@ -15,7 +15,7 @@ import { UsersModule } from '../users/users.module';
       session: false,
     }),
     JwtModule.register({
-      secret: '9isj693csd@k0p?sjsjputosilodecifra',// process.env.JWT_SECRET,
+      secret: '9isj693csd@k0p?sjsjputosilodecifra', // process.env.JWT_SECRET,
       signOptions: {
         expiresIn: '10h',
       },

@@ -19,6 +19,7 @@ export class RestaurantController {
   constructor(private restaurantService: RestaurantService) {}
 
   @Get()
+  @UseGuards(AuthGuard())
   public async getRestaurant(@Res() res) {
     const restaurant = await this.restaurantService.getDataRestaurant();
     if (!restaurant) {
@@ -27,8 +28,17 @@ export class RestaurantController {
     return res.status(HttpStatus.OK).json(restaurant);
   }
 
+  @Get('/infoRestaurant')
+  public async getInfoRestaurant(@Res() res) {
+    const restaurant = await this.restaurantService.getDataRestaurant();
+    if (!restaurant) {
+      throw new NotFoundException('restaurant does not exist!');
+    }
+    return res.status(HttpStatus.OK).json(restaurant);
+  }
+
   @Post()
- // @UseGuards(AuthGuard())
+  // @UseGuards(AuthGuard())
   public async addrestaurant(
     @Res() res,
     @Body() createRestaurantDto: CreateRestaurantDto,
@@ -43,7 +53,7 @@ export class RestaurantController {
         restaurant,
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       return res.status(HttpStatus.BAD_REQUEST).json({
         message: 'Error: restaurant not created!',
         status: 400,

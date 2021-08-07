@@ -30,7 +30,7 @@ export class DrinkController {
 
   @Post()
   // @UseGuards(AuthGuard())
-  public async addPlate(@Res() res, @Body() createDrinkDto: CreateDrinkDto) {
+  public async addDrink(@Res() res, @Body() createDrinkDto: CreateDrinkDto) {
     try {
       const drink = await this.drinkService.create(createDrinkDto);
       return res.status(HttpStatus.OK).json({
@@ -48,7 +48,7 @@ export class DrinkController {
 
   @Put('/:id')
   @UseGuards(AuthGuard())
-  public async updatePlate(
+  public async updateDrink(
     @Res() res,
     @Param('id') drinkId: string,
     @Body() updateDrinkDto: UpdateDrinkDto,
