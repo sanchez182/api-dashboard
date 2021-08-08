@@ -20,25 +20,23 @@ export class TableController {
 
   @Get()
   public async getAlltables(@Res() res) {
-    const restaurant = await this.tableService.findAll();
-    console.log(restaurant)
-    if (!restaurant) {
-      throw new NotFoundException('Table does not exist!');
+    const tables = await this.tableService.findAll();
+    if (!tables) {
+      throw new NotFoundException('There are no tables in the database!');
     }
-    return res.status(HttpStatus.OK).json(restaurant);
+    return res.status(HttpStatus.OK).json(tables);
   }
 
   @Post()
   @UseGuards(AuthGuard())
   public async addNewTable(@Res() res, @Body() createTable: CreateTableDto) {
     try {
-      const restaurant = await this.tableService.create(createTable);
+      const table = await this.tableService.create(createTable);
       return res.status(HttpStatus.OK).json({
         message: 'Table has been created successfully',
-        restaurant,
+        table,
       });
     } catch (err) {
-      console.log(err);
       return res.status(HttpStatus.BAD_REQUEST).json({
         message: 'Error: restaurant not created!',
         status: 400,
@@ -54,16 +52,13 @@ export class TableController {
     @Body() updateTableDto: UpdateTablesDto,
   ) {
     try {
-      const restaurant = await this.tableService.update(
-        updateTableDto,
-        tableId,
-      );
-      if (!restaurant) {
-        throw new NotFoundException('restaurant does not exist!');
+      const table = await this.tableService.update(updateTableDto, tableId);
+      if (!table) {
+        throw new NotFoundException('table does not exist!');
       }
       return res.status(HttpStatus.OK).json({
         message: 'Table has been successfully updated',
-        restaurant,
+        table,
       });
     } catch (err) {
       return res.status(HttpStatus.BAD_REQUEST).json({
@@ -79,16 +74,13 @@ export class TableController {
     if (!tableId) {
       throw new NotFoundException('Table ID does not exist');
     }
-
-    const restaurant = await this.tableService.remove(tableId);
-
-    if (!restaurant) {
+    const table = await this.tableService.remove(tableId);
+    if (!table) {
       throw new NotFoundException('Table does not exist');
     }
-
     return res.status(HttpStatus.OK).json({
       message: 'Table has been deleted',
-      restaurant,
+      table,
     });
   }
 }

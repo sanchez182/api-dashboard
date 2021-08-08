@@ -40,7 +40,7 @@ export class CreatePlateDto {
   @IsString()
   @IsNotEmpty()
   readonly foodTime: string;
-  
+
   @IsArray()
   @IsNotEmpty()
   readonly ingredients: IIngredients;

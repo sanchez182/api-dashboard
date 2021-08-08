@@ -5,5 +5,4 @@ export interface ITable extends Document {
   readonly tableNumber: number;
   readonly selected: boolean;
   readonly type: string;
-  readonly state: string;
 }
