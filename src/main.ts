@@ -42,7 +42,7 @@ async function bootstrap() {
     .build(); */
   /*   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document); */
-  const port: number = parseInt(`${process.env.PORT}`) || 4000;
+  const port: number = parseInt(`${process.env.PORT}`) || 4001;
   await app.listen(port);
 }
 bootstrap();

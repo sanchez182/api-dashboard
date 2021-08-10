@@ -46,7 +46,7 @@ export class TableController {
 
   @Put('/:id')
   @UseGuards(AuthGuard())
-  public async updaterestaurant(
+  public async updateTable(
     @Res() res,
     @Param('id') tableId: string,
     @Body() updateTableDto: UpdateTablesDto,

@@ -40,6 +40,31 @@ export class TableService {
     const existingCustomer = await this.TableModel.findByIdAndUpdate(
       { _id: tableId },
       updateTableDto,
+      {
+        new: true,
+        upsert: true,
+        rawResult: true, // Return the raw result from the MongoDB driver
+      },
+    );
+
+    if (!existingCustomer) {
+      throw new NotFoundException(`Table  not found`);
+    }
+
+    console.log(existingCustomer);
+    return existingCustomer;
+  }
+
+  public async updateState(seleted: boolean, tableId: string): Promise<any> {
+    console.log(tableId);
+    const existingCustomer = await this.TableModel.findByIdAndUpdate(
+      { _id: tableId },
+      { $set: { selected: seleted } },
+      {
+        new: true,
+        upsert: true,
+        rawResult: true, // Return the raw result from the MongoDB driver
+      },
     );
 
     if (!existingCustomer) {
