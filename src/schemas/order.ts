@@ -14,9 +14,6 @@ export class Order extends Document {
 
   @Prop()
   tableNumber: number;
-/* 
-  @Prop({type:Types.ObjectId,ref: []})
-  itemsOrder: IOrdersItem; */
   
   @Prop({type:Object})
   itemsOrder: IOrdersItem
