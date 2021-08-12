@@ -37,7 +37,6 @@ export class OrderController {
   }
 
   @Post()
-  @UseGuards(AuthGuard())
   public async addOrder(@Res() res, @Body() createOrderDto: CreateOrderDto) {
     try {
       console.log(createOrderDto);
@@ -56,7 +55,6 @@ export class OrderController {
   }
 
   @Put('/:id')
-  @UseGuards(AuthGuard())
   public async updateOrder(
     @Res() res,
     @Param('id') OrderId: string,

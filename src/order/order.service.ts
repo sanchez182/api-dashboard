@@ -64,15 +64,23 @@ export class OrderService {
     OrderId: string,
   ): Promise<any> {
     console.log(updateOrderDto);
-    const existingCustomer = await this.orderModel.findOneAndUpdate(
-      { _id: OrderId },
-      updateOrderDto,
-      {
+    const existingCustomer = await this.orderModel
+      .findOneAndUpdate({ _id: OrderId }, updateOrderDto, {
         new: true,
         upsert: true,
         rawResult: true, // Return the raw result from the MongoDB driver
-      },
-    );
+      })
+      .populate({
+        path: 'itemsOrder.itemsFood.plate',
+        model: 'Plate',
+        select: { _id: 1, plateName: 1, ingredients: 1 },
+      })
+      .populate({
+        path: 'itemsOrder.itemsDrink.drink',
+        model: 'Drink',
+        select: { _id: 1, drinkName: 1, ingredients: 1 },
+      })
+      .exec();
 
     if (!existingCustomer) {
       throw new NotFoundException(`Order  not found`);

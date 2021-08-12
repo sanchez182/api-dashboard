@@ -1,9 +1,9 @@
 import { Order, OrderSchema } from '../schemas/Order';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from 'src/auth/auth.module';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [

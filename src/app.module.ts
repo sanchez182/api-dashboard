@@ -11,10 +11,12 @@ import { RestaurantModule } from './restaurant/restaurant.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { OrderModule } from './order/order.module';
+import { AppStatusModule } from './appStatus/appStatus.module';
 
 @Module({
   imports: [
     AuthModule,
+    AppStatusModule,
     CloudinaryModule,
     OrderModule,
     TableModule,

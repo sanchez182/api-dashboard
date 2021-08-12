@@ -1,16 +1,9 @@
-import {
-  MaxLength,
-  IsNotEmpty,
-  IsString,
-  IsNumber,
-  IsObject,
-} from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsObject } from 'class-validator';
 import { IOrdersItem } from '../interfaces/order.interface';
 export class CreateOrderDto {
-  @IsString()
-  @MaxLength(60)
+  @IsNumber()
   @IsNotEmpty()
-  readonly state: string;
+  readonly state: number;
 
   @IsNumber()
   readonly tableNumber: number;
@@ -18,6 +11,9 @@ export class CreateOrderDto {
   @IsString()
   @IsNotEmpty()
   readonly restaurant: string;
+
+  @IsString()
+  readonly extraInfo: string;
 
   @IsObject()
   @IsNotEmpty()

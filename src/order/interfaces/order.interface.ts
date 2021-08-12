@@ -26,8 +26,9 @@ export interface IOrdersItem {
 }
 
 export interface IOrder extends Document {
-  readonly state: string;
+  readonly state: number;
   readonly restaurant: string;
   readonly tableNumber: number;
+  readonly extraInfo: string;
   readonly itemsOrder: IOrdersItem;
 }
