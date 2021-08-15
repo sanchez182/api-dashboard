@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { IOrdersItem } from '../Order/interfaces/Order.interface';
+import { IOrdersItem } from '../Order/interfaces/order.interface';
 
 @Schema({ collection: 'orders' })
 export class Order extends Document {

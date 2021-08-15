@@ -1,4 +1,4 @@
-import { Order, OrderSchema } from '../schemas/Order';
+import { Order, OrderSchema } from '../schemas/order';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrderController } from './order.controller';
