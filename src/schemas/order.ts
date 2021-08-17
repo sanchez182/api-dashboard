@@ -19,6 +19,9 @@ export class Order extends Document {
   clientId: string;
   
   @Prop()
+  trackingCode: string;
+  
+  @Prop()
   tableNumber: number;
   
   @Prop({type:Object})

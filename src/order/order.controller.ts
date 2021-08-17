@@ -36,6 +36,15 @@ export class OrderController {
     return res.status(HttpStatus.OK).json(order);
   }
 
+  @Get('byOrderUser/:id')
+  public async findByIdSocketClient(@Res() res, @Param('id') id: string) {
+    const order = await this.orderService.findByIdSocketClient(id);
+    if (!order) {
+      throw new NotFoundException('Order does not exist!');
+    }
+    return res.status(HttpStatus.OK).json(order);
+  }
+
   @Post()
   public async addOrder(@Res() res, @Body() createOrderDto: CreateOrderDto) {
     try {
@@ -62,6 +71,32 @@ export class OrderController {
   ) {
     try {
       const order = await this.orderService.update(updateOrderDto, OrderId);
+      if (!order) {
+        throw new NotFoundException('Order does not exist!');
+      }
+      return res.status(HttpStatus.OK).json({
+        message: 'Order has been successfully updated',
+        order,
+      });
+    } catch (err) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: 'Error: Order not updated!',
+        status: 400,
+      });
+    }
+  }
+
+  @Put('updateClient/:id')
+  public async updateTrackingCodeOrder(
+    @Res() res,
+    @Param('id') trackingCode: string,
+    @Body() newSocket: any,
+  ) {
+    try {
+      const order = await this.orderService.updateSocketClientIdeOrder(
+        trackingCode,
+        newSocket.socketClientId,
+      );
       if (!order) {
         throw new NotFoundException('Order does not exist!');
       }

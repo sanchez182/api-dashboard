@@ -17,6 +17,10 @@ export class CreateOrderDto {
   readonly clientId: string;
 
   @IsString()
+  @IsNotEmpty()
+  readonly trackingCode: string;
+
+  @IsString()
   readonly extraInfo: string;
 
   @IsObject()

@@ -28,6 +28,7 @@ export interface IOrdersItem {
 export interface IOrder extends Document {
   readonly state: number;
   readonly idRestaurant: string;
+  readonly trackingCode: string;
   readonly tableNumber: number;
   readonly extraInfo: string;
   readonly clientId: string;

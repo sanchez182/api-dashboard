@@ -39,6 +39,25 @@ export class OrderService {
     }
     return order;
   }
+  public async findByIdSocketClient(id: string): Promise<Order> {
+    const order = await this.orderModel
+      .findOne({ clientId: id })
+      .populate({
+        path: 'itemsOrder.itemsFood.plate',
+        model: 'Plate',
+        select: { _id: 1, plateName: 1 },
+      })
+      .populate({
+        path: 'itemsOrder.itemsDrink.drink',
+        model: 'Drink',
+        select: { _id: 1, drinkName: 1 },
+      })
+      .exec();
+    if (!order) {
+      throw new NotFoundException(`Order not found`);
+    }
+    return order;
+  }
 
   public async create(createOrderDto: CreateOrderDto): Promise<IOrder> {
     let newOrder = await new this.orderModel(createOrderDto);
@@ -79,6 +98,38 @@ export class OrderService {
       { _id: orderId },
       { state },
     );
+
+    if (!existingCustomer) {
+      throw new NotFoundException(`Order  not found`);
+    }
+    return existingCustomer;
+  }
+
+  public async updateSocketClientIdeOrder(
+    trackingCode: string,
+    socketClientId: string,
+  ): Promise<any> {
+    const existingCustomer = await this.orderModel
+      .findOneAndUpdate(
+        { trackingCode: trackingCode },
+        { clientId: socketClientId },
+        {
+          new: false,
+          upsert: true,
+          rawResult: true, // Return the raw result from the MongoDB driver
+        },
+      )
+      .populate({
+        path: 'itemsOrder.itemsFood.plate',
+        model: 'Plate',
+        select: { _id: 1 },
+      })
+      .populate({
+        path: 'itemsOrder.itemsDrink.drink',
+        model: 'Drink',
+        select: { _id: 1 },
+      })
+      .exec();
 
     if (!existingCustomer) {
       throw new NotFoundException(`Order  not found`);
