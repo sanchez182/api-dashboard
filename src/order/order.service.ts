@@ -59,10 +59,25 @@ export class OrderService {
     return newOrder;
   }
 
-  public async updateOrderStatus(state: number, OrderId: string): Promise<any> {
+  public async updateOrderClientId(
+    clientId: string,
+    orderId: string,
+  ): Promise<any> {
     const existingCustomer = await this.orderModel.updateOne(
-      { _id: OrderId },
-      { state }
+      { _id: orderId },
+      { clientId },
+    );
+
+    if (!existingCustomer) {
+      throw new NotFoundException(`Order  not found`);
+    }
+    return existingCustomer;
+  }
+
+  public async updateOrderStatus(state: number, orderId: string): Promise<any> {
+    const existingCustomer = await this.orderModel.updateOne(
+      { _id: orderId },
+      { state },
     );
 
     if (!existingCustomer) {
@@ -73,11 +88,11 @@ export class OrderService {
 
   public async update(
     updateOrderDto: UpdateOrderDto,
-    OrderId: string,
+    orderId: string,
   ): Promise<any> {
     console.log(updateOrderDto);
     const existingCustomer = await this.orderModel
-      .findOneAndUpdate({ _id: OrderId }, updateOrderDto, {
+      .findOneAndUpdate({ _id: orderId }, updateOrderDto, {
         new: true,
         upsert: true,
         rawResult: true, // Return the raw result from the MongoDB driver

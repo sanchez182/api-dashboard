@@ -10,10 +10,13 @@ export class Order extends Document {
   state: number;
 
   @Prop()
-  restaurant: string;
+  idRestaurant: string;
 
   @Prop()
   extraInfo: string;
+
+  @Prop()
+  clientId: string;
   
   @Prop()
   tableNumber: number;

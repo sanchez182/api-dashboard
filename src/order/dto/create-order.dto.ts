@@ -10,7 +10,11 @@ export class CreateOrderDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly restaurant: string;
+  readonly idRestaurant: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly clientId: string;
 
   @IsString()
   readonly extraInfo: string;

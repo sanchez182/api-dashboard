@@ -78,6 +78,7 @@ export class OrderController {
   }
 
   @Put('/:id/:state')
+  @UseGuards(AuthGuard())
   public async updateOrderStatus(
     @Res() res,
     @Param('id') orderId: string,
@@ -85,6 +86,32 @@ export class OrderController {
   ) {
     try {
       const order = await this.orderService.updateOrderStatus(state, orderId);
+      if (!order) {
+        throw new NotFoundException('Order does not exist!');
+      }
+      return res.status(HttpStatus.OK).json({
+        message: 'Order has been successfully updated',
+        order,
+      });
+    } catch (err) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: 'Error: Order not updated!',
+        status: 400,
+      });
+    }
+  }
+
+  @Put('/:id/:clientId')
+  public async updateOrderClientId(
+    @Res() res,
+    @Param('id') orderId: string,
+    @Param('clientId') clientId: string,
+  ) {
+    try {
+      const order = await this.orderService.updateOrderClientId(
+        clientId,
+        orderId,
+      );
       if (!order) {
         throw new NotFoundException('Order does not exist!');
       }
