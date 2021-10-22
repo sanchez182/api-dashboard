@@ -8,6 +8,7 @@ export interface IOrdersItem {
   itemsFood: [
     {
       quantity: number;
+      authorized: boolean;
       plate: {
         type: Types.ObjectId;
         ref: 'Plate';
@@ -17,6 +18,7 @@ export interface IOrdersItem {
   itemsDrink: [
     {
       quantity: number;
+      authorized: boolean;
       drink: {
         type: Types.ObjectId;
         ref: 'Drink';
